@@ -6,11 +6,10 @@ class SearchableCombobox(ttk.Combobox):
         super().__init__(master, **kwargs)
         self._completion_list = []
         self._hits = []
-        self._hit_index = 0
         self.position = 0
         self.bind('<KeyRelease>', self.handle_keyrelease)
-        self.bind('<KeyPress>', self.handle_keypress)
         self.bind('<Button-1>', self.show_all_options)
+        self.bind('<FocusIn>', self.on_focus_in)
 
     def set_completion_list(self, completion_list):
         self._completion_list = sorted(completion_list)
@@ -21,7 +20,6 @@ class SearchableCombobox(ttk.Combobox):
         _hits = [item for item in self._completion_list if search_term in item.lower()]
 
         if _hits != self._hits:
-            self._hit_index = 0
             self._hits = _hits
 
         if _hits:
@@ -29,24 +27,29 @@ class SearchableCombobox(ttk.Combobox):
             self.event_generate('<Down>')
             self.selection_clear()
             self.select_range(self.position, tk.END)
+            self.icursor(self.position)
 
     def handle_keyrelease(self, event):
-        if event.keysym in ('BackSpace', 'Left', 'Right', 'Up', 'Down'):
+        if event.keysym in ('Left', 'Right', 'Up', 'Down'):
             return
-        self.autocomplete()
-
-    def handle_keypress(self, event):
         self.position = len(self.get())
+        self.autocomplete()
+        self.icursor(self.position)
+        self.focus()
 
     def show_all_options(self, event=None):
         self['values'] = self._completion_list
         self.event_generate('<Down>')
+        self.focus()
+
+    def on_focus_in(self, event):
+        self.icursor(self.position)
 
 class StyledDropdown:
     def __init__(self, root, options):
         self.root = root
         self.options = options
-        self.selected_option = tk.StringVar()
+        self.selected_option = tk.StringVar(value="Choose option")
 
         self.frame = ttk.Frame(root, padding="10")
         self.frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -68,16 +71,15 @@ root = tk.Tk()
 root.title("Searchable Dropdown Menu")
 root.geometry( "400x400" ) # Set the size of the window
 
-# List of 20 different options
+# List of options with a placeholder option at the beginning
 options = [
-    "windows.pslist", "windows.psscan", "windows.pstree", "windows.cmdline",
+    "Choose option", "windows.pslist", "windows.psscan", "windows.pstree", "windows.cmdline",
     "windows.services", "windows.registry", "windows.filescan", "windows.malware",
     "windows.network", "windows.memory", "windows.disk", "windows.eventlog",
     "windows.prefetch", "windows.timeline", "windows.locks", "windows.hooks",
     "windows.sysinfo", "windows.drivers", "windows.pipes", "windows.sockets"
 ]
-sorted_list = sorted(options)
-dropdown = StyledDropdown(root, sorted_list)
+sorted_options = sorted(options)
+dropdown = StyledDropdown(root, sorted_options)
 
 root.mainloop()
-
