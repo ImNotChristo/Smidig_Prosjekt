@@ -9,11 +9,11 @@ class RunButton:
 
     def create_button(self):
         self.btn = Button(self.master, text='RUN', command=self.master.destroy)
-        self.btn.place(x=300, y=40)
+        self.btn.place(x=10, y=10)
 
 
 root = Tk()
-# root.geometry('500x300')
+root.geometry('100x100')
 
 # instance of RunButton
 run_button = RunButton(root)
