@@ -13,4 +13,4 @@ file_entry.insert(0, "IE10WN7-2022114-202804.raw")  # Setter inn en eksempelteks
 file_entry.pack(side=tk.LEFT, padx=10, pady=10)  # Plasserer tekstfeltet i vinduet med noe padding
 
 # Starte GUI-loop
-root.mainloop()
+root.mainloop()# Jovana er best
