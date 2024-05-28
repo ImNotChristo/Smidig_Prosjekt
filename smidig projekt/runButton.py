@@ -7,4 +7,3 @@ print(hello)
 
 
 
-print("heeyyyy bbbb")
