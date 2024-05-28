@@ -5,37 +5,35 @@ class CurtainDropdown:
     def __init__(self, root, options):
         self.root = root
         self.options = options
-        self.variables = []
+        self.selected_option = tk.StringVar()
+        
         self.frame = ttk.Frame(root, padding="10")
         self.frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        self.dropdown_button = ttk.Button(self.frame, text="Select Options", command=self.toggle_dropdown)
+        self.dropdown_button = ttk.Button(self.frame, text="Select Option", command=self.toggle_dropdown)
         self.dropdown_button.grid(row=0, column=0, sticky=tk.W)
         self.dropdown_open = False
 
-        self.checkbuttons_frame = ttk.Frame(self.frame)
-        self.create_checkbuttons()
-
-    def create_checkbuttons(self):
-        for idx, option in enumerate(self.options):
-            var = tk.StringVar(value="")
-            chk = ttk.Checkbutton(self.checkbuttons_frame, text=option, variable=var, onvalue=option, offvalue="")
-            chk.grid(row=idx, column=0, sticky=tk.W)
-            self.variables.append(var)
-
-        self.show_selected_button = ttk.Button(self.checkbuttons_frame, text="Show Selected", command=self.show_selected)
-        self.show_selected_button.grid(row=len(self.options), column=0, sticky=tk.W)
+        self.combobox = ttk.Combobox(self.frame, textvariable=self.selected_option, values=self.options)
+        self.combobox.bind("<<ComboboxSelected>>", self.on_select)
+        
+        self.show_selected_button = ttk.Button(self.frame, text="Show Selected", command=self.show_selected)
+        self.show_selected_button.grid(row=2, column=0, sticky=tk.W)
 
     def toggle_dropdown(self):
         if self.dropdown_open:
-            self.checkbuttons_frame.grid_forget()
+            self.combobox.grid_forget()
         else:
-            self.checkbuttons_frame.grid(row=1, column=0, sticky=tk.W)
+            self.combobox.grid(row=1, column=0, sticky=tk.W)
         self.dropdown_open = not self.dropdown_open
 
+    def on_select(self, event):
+        self.dropdown_open = False
+        self.combobox.grid_forget()
+        self.dropdown_button.config(text=self.selected_option.get())
+
     def show_selected(self):
-        selected_items = [var.get() for var in self.variables if var.get()]
-        print("Selected items:", selected_items)
+        print("Selected item:", self.selected_option.get())
 
 root = tk.Tk()
 root.title("Curtain Dropdown Menu")
