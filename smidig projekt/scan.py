@@ -37,6 +37,7 @@ options = [
     "windows.netstat", "windows.registry.printkey", "windows.filescan", "windows.dumpfiles"
 ]
 
+sorted_list = sorted(options)
 dropdown = StyledDropdown(root, options)
 
 root.mainloop()
