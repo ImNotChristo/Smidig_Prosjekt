@@ -25,6 +25,7 @@ def select_image_file():
         file_entry.delete(0, tk.END)
         file_entry.insert(0, file_path)
 
+
 # Create the main window
 root = tk.Tk()
 root.title("Image File Selector")
