@@ -13,7 +13,8 @@ def select_image_file():
             ("JPEG files", "*.jpeg"), # la til
             ("GIF files", "*.gif"),
             ("BMP files", "*.bmp"),
-            ("All files", "*.*")
+            ("All files", "*.*"),
+            ("Raw files", "*.raw")
         ]
         # filetypes=[("Image Files", ".png;.jpg;.jpeg;.gif;*.bmp")]
     )
