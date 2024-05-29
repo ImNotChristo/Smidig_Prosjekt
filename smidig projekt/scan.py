@@ -17,25 +17,26 @@ class SearchableCombobox(ttk.Combobox):
 
     def autocomplete(self):
         search_term = self.get().lower()
-        _hits = [item for item in self._completion_list if search_term in item.lower()]
+        _hits = self.filter_hits(search_term)
 
         if _hits != self._hits:
             self._hits = _hits
 
         if _hits:
             self['values'] = _hits
-            self.event_generate('<Down>')
-            self.selection_clear()
-            self.select_range(self.position, tk.END)
-            self.icursor(self.position)
+            self.event_generate('<Down>')  # Open the dropdown
+
+    def filter_hits(self, search_term):
+        hits = [item for item in self._completion_list if search_term in item.lower()]
+        return hits
 
     def handle_keyrelease(self, event):
-        if event.keysym in ('Left', 'Right', 'Up', 'Down'):
+        if event.keysym in ('Left', 'Right', 'Up', 'Down', 'BackSpace', 'Delete'):
             return
         self.position = len(self.get())
         self.autocomplete()
-        self.icursor(self.position)
-        self.focus()
+        self.icursor(self.position)  # Maintain the cursor position
+        self.focus()  # Keep focus on the combobox
 
     def show_all_options(self, event=None):
         self['values'] = self._completion_list
@@ -49,7 +50,7 @@ class StyledDropdown:
     def __init__(self, root, options):
         self.root = root
         self.options = options
-        self.selected_option = tk.StringVar(value="Choose option")
+        self.selected_option = tk.StringVar(value="")
 
         self.frame = ttk.Frame(root, padding="10")
         self.frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -69,11 +70,11 @@ class StyledDropdown:
 
 root = tk.Tk()
 root.title("Searchable Dropdown Menu")
-root.geometry( "400x400" ) # Set the size of the window
+root.geometry("400x400")  # Set the size of the window
 
-# List of options with a placeholder option at the beginning
+# List of options
 options = [
-    "Choose option", "windows.pslist", "windows.psscan", "windows.pstree", "windows.cmdline",
+    "windows.pslist", "windows.psscan", "windows.pstree", "windows.cmdline",
     "windows.services", "windows.registry", "windows.filescan", "windows.malware",
     "windows.network", "windows.memory", "windows.disk", "windows.eventlog",
     "windows.prefetch", "windows.timeline", "windows.locks", "windows.hooks",
