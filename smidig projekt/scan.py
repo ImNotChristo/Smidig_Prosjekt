@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-
 class SearchableCombobox(ttk.Combobox):
     def __init__(self, master=None, **kwargs):
         super().__init__(master, **kwargs)
