@@ -18,7 +18,3 @@ root.geometry('100x100')
 # instance of RunButton
 run_button = RunButton(root)
 root.mainloop()
-
-
-
-
