@@ -7,8 +7,9 @@ class MainApp:
     def __init__(self, root):
         # Initialize the main application window
         self.root = root
-        self.root.title("Volatility 3 GUI")
+        self.root.title("Artifacts vol.py (GUI)")
         self.root.geometry("800x600")
+        # self.root.configure(bg='white')
 
         # Create main frames
         self.create_frames()
@@ -23,7 +24,7 @@ class MainApp:
             "windows.netstat", "windows.registry.printkey", "windows.filescan", "windows.dumpfiles"
         ]
         sorted_options = sorted(options)
-        self.dropdown = StyledDropdown(self.right_frame, sorted_options)
+        self.dropdown = StyledDropdown(self.middle_frame, sorted_options)
 
         # Create Run button below the scan dropdown
         self.run_button = RunButton(self.right_frame)
@@ -31,10 +32,13 @@ class MainApp:
     def create_frames(self):
         # Create frames for organizing layout
         self.left_frame = tk.Frame(self.root, width=300, height=150)
-        self.left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="n")
+        self.left_frame.grid(row=0, column=0, padx=10, pady=13, sticky="n")
+
+        self.middle_frame = tk.Frame(self.root, width=300, height=150)
+        self.middle_frame.grid(row=0, column=1, padx=10, pady=10, sticky="n")
 
         self.right_frame = tk.Frame(self.root, width=300, height=150)
-        self.right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="n")
+        self.right_frame.grid(row=1, column=2, padx=10, pady=10, sticky="n")
 
     def run(self):
         # Start the main event loop

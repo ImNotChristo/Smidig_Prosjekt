@@ -9,7 +9,7 @@ class RunButton:
     def create_button(self):
         # Create Run button
         self.btn = RunButtonFunction(self.master, self.run_command).btn
-        self.btn.grid(row=2, column=0, pady=10, sticky="w")
+        self.btn.grid(row=0, column=0, pady=10, sticky="w")
 
     def run_command(self):
         # Define Run button command
