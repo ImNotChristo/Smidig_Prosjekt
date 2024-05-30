@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "smidig projekt"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

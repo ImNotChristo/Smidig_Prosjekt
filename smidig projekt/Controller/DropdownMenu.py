@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog, messagebox
+from tkinter import *
 
 class SearchableCombobox(ttk.Combobox):
     def __init__(self, master=None, **kwargs):
@@ -54,3 +56,39 @@ class SearchableCombobox(ttk.Combobox):
 
     def on_focus_in(self, event):
         self.icursor(self.position)
+
+class RunButtonFunction:
+    def __init__(self, master):
+        self.master = master
+        self.btn = None
+        self.create_button()
+    
+    def create_button(self):
+        self.btn = Button(self.master, text='RUN', command=self.master.destroy)
+        self.btn.place(x=250, y=10)
+
+class FinishedImageButton:
+    def __init__(self, file_entry):
+        self.file_entry = file_entry
+
+    def select_image_file(self):
+        # Open a file dialog to select an image file
+        file_path = filedialog.askopenfilename(
+            title="Select an Image File",
+            filetypes=[
+                ("PNG files", "*.png"),
+                ("JPEG files", "*.jpg"),
+                ("JPEG files", "*.jpeg"),
+                ("GIF files", "*.gif"),
+                ("BMP files", "*.bmp"),
+                ("All files", "*.*"),
+                ("Raw files", "*.raw")
+            ]
+        )
+
+        if file_path:
+            # Display the selected file path in a message box
+            messagebox.showinfo("Selected Image File", f"Selected file: {file_path}")
+            # Update the file entry field
+            self.file_entry.delete(0, tk.END)
+            self.file_entry.insert(0, file_path)

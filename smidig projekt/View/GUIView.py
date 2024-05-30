@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import *
 from Controller.DropdownMenu import SearchableCombobox
+from Controller.DropdownMenu import RunButtonFunction
+from Controller.DropdownMenu import FinishedImageButton
 
 class StyledDropdown:
     # style on the popup window and assigning it also the method SearchableCombobox for functionality and searching
@@ -26,10 +29,31 @@ class StyledDropdown:
     def show_selected(self):
         print("Selected item:", self.selected_option.get())
 
+class RunButton:
+    def __init__(self, master):
+        self.master = master
+        self.btn = Button(self.master, text='RUN', command=self.master.destroy)
+        self.btn.place(x=250, y=10)
+
+class StyledImageButton:
+    def __init__(self, master):
+        self.master = master
+        self.file_label = tk.Label(self.master, text="File:")
+        self.file_label.grid(row=0, column=0, padx=10, pady=10)
+        self.file_entry = tk.Entry(self.master, width=50)
+        self.file_entry.grid(row=0, column=1, padx=10, pady=10)
+
+
 # assigning the imported library to root for the frontend side
 root = tk.Tk()
 root.title("Searchable Dropdown Menu")
-root.geometry("400x400")  # Set the size of the window
+root.geometry("600x400")  # Set the size of the window
+
+# instance of RunButton
+run_button = RunButton(root)
+
+# Instance of StyledImageButton
+styled_image_button = StyledImageButton(root)
 
 # List of options
 options = [
