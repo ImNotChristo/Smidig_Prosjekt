@@ -1,1 +1,14 @@
 /.idea/
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Other files to ignore
+*.log
+*.tmp
+*.bak
+
+# Ignore virtual environments
+venv/
+env/
