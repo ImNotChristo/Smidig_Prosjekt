@@ -5,6 +5,7 @@ from View.RunButtonView import RunButton
 
 class MainApp:
     def __init__(self, root):
+        # Initialize the main application window
         self.root = root
         self.root.title("Volatility 3 GUI")
         self.root.geometry("800x600")
@@ -28,6 +29,7 @@ class MainApp:
         self.run_button = RunButton(self.right_frame)
 
     def create_frames(self):
+        # Create frames for organizing layout
         self.left_frame = tk.Frame(self.root, width=300, height=150)
         self.left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="n")
 
@@ -35,9 +37,12 @@ class MainApp:
         self.right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="n")
 
     def run(self):
+        # Start the main event loop
         self.root.mainloop()
 
 if __name__ == "__main__":
+    # Create and run the main application
     root = tk.Tk()
     app = MainApp(root)
     app.run()
+

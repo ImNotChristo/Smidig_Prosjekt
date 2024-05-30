@@ -9,6 +9,7 @@ class StyledDropdown:
         self.create_widgets()
 
     def create_widgets(self):
+        # Create dropdown and associated widgets
         self.selected_option = tk.StringVar(value="")
 
         self.label = ttk.Label(self.master, text="Scan:", font=("Helvetica", 12))
@@ -22,4 +23,5 @@ class StyledDropdown:
         self.show_selected_button.grid(row=1, column=0, columnspan=2, pady=(10, 0), sticky="w")
 
     def show_selected(self):
+        # Show the selected item in the dropdown menu
         print("Selected item:", self.selected_option.get())

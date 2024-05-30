@@ -7,6 +7,7 @@ class StyledImageButton:
         self.create_widgets()
 
     def create_widgets(self):
+        # Create file selection widgets
         self.file_label = tk.Label(self.master, text="File:")
         self.file_label.grid(row=0, column=0, padx=10, pady=10, sticky="w")
 
@@ -19,4 +20,5 @@ class StyledImageButton:
         self.finished_image_button = FinishedImageButton(self.file_entry)
 
     def select_image_file(self):
+        # Open file dialog to select an image file
         self.finished_image_button.select_image_file()
