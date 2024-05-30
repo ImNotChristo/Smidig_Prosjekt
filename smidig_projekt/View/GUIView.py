@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from Controller.DropdownMenu import SearchableCombobox
+from smidig_projekt.Controller.DropdownMenu import SearchableCombobox
 
 class StyledDropdown:
     # style on the popup window and assigning it also the method SearchableCombobox for functionality and searching
