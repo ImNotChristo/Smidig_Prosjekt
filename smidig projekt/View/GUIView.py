@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from Controller.DropdownMenu import SearchableCombobox
-from Controller.DropdownMenu import RunButtonFunction
-from Controller.DropdownMenu import FinishedImageButton
 
 class StyledDropdown:
     # style on the popup window and assigning it also the method SearchableCombobox for functionality and searching
