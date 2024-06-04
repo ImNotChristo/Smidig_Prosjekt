@@ -19,6 +19,9 @@ class MainApp:
         # Create file selection on the left
         self.styled_image_button = StyledImageButton(self.left_frame)
 
+        # Manual command variable
+        self.manual_command_var = tk.StringVar()
+
         # Create scan dropdown on the right
         options = [
             "windows.info", "windows.pslist", "windows.psscan", "windows.pstree", "windows.dumpfiles", 
@@ -26,10 +29,13 @@ class MainApp:
             "windows.netstat", "windows.registry.printkey", "windows.filescan", "windows.dumpfiles"
         ]
         sorted_options = sorted(options)
-        self.dropdown = StyledDropdown(self.middle_frame, sorted_options)
+        self.dropdown = StyledDropdown(self.middle_frame, sorted_options, self.manual_command_var, self.styled_image_button.get_file_path)
 
-        # Create Run button below the scan dropdown and pass the get_selected_option method
-        self.run_button = RunButton(self.right_frame, self.dropdown.get_selected_option, self.styled_image_button.get_file_path)
+        # Create manual entry
+        self.create_manual_entry()
+
+        # Create Run button below the scan dropdown and pass the get_manual_command method
+        self.run_button = RunButton(self.right_frame, self.get_manual_command)
 
     def create_frames(self):
         # Create frames for organizing layout
@@ -42,6 +48,17 @@ class MainApp:
         self.right_frame = tk.Frame(self.root, width=300, height=150)
         self.right_frame.grid(row=1, column=2, padx=10, pady=10, sticky="n")
 
+    def create_manual_entry(self):
+        # Create manual command entry
+        self.manual_label = tk.Label(self.middle_frame, text="Manual Command:", font=("Helvetica", 12))
+        self.manual_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
+        self.manual_entry = tk.Entry(self.middle_frame, textvariable=self.manual_command_var, width=80)
+        self.manual_entry.grid(row=1, column=1, pady=10, sticky="w")
+
+    def get_manual_command(self):
+        # Return the manual command
+        return self.manual_command_var.get()
+
     def run(self):
         # Start the main event loop
         self.root.mainloop()
@@ -51,4 +68,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = MainApp(root)
     app.run()
-
