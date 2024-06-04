@@ -2,6 +2,7 @@ import tkinter as tk
 from View.StyledDropdownView import StyledDropdown
 from View.StyledImageButtonView import StyledImageButton
 from View.RunButtonView import RunButton 
+from View.OutputFieldView import OutputField
 
 class MainApp:
     def __init__(self, root):
@@ -29,6 +30,9 @@ class MainApp:
         # Create Run button below the scan dropdown
         self.run_button = RunButton(self.right_frame)
 
+        # Create Output field
+        self.create_ouputfield = OutputField(self.output_frame)
+
     def create_frames(self):
         # Create frames for organizing layout
         self.left_frame = tk.Frame(self.root, width=300, height=150)
@@ -39,6 +43,10 @@ class MainApp:
 
         self.right_frame = tk.Frame(self.root, width=300, height=150)
         self.right_frame.grid(row=1, column=2, padx=10, pady=10, sticky="n")
+
+        # LA TIL
+        self.output_frame = tk.Frame(self.root, width=60, height=50)
+        self.output_frame.grid(row=2, column=0, padx=10, pady=10, sticky="n")
 
     def run(self):
         # Start the main event loop
