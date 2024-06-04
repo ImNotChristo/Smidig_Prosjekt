@@ -1,7 +1,8 @@
 import tkinter as tk
 from View.StyledDropdownView import StyledDropdown
 from View.StyledImageButtonView import StyledImageButton
-from View.RunButtonView import RunButton 
+from View.RunButtonView import RunButton
+
 
 class MainApp:
     def __init__(self, root):
@@ -19,8 +20,8 @@ class MainApp:
 
         # Create scan dropdown on the right
         options = [
-            "windows.info", "windows.pslist", "windows.psscan", "windows.pstree", "windows.dumpfiles", 
-            "windows.memmap", "windows.handles", "windows.dlllist", "windows.cmdline", "windows.netscan", 
+            "windows.info", "windows.pslist", "windows.psscan", "windows.pstree", "windows.dumpfiles",
+            "windows.memmap", "windows.handles", "windows.dlllist", "windows.cmdline", "windows.netscan",
             "windows.netstat", "windows.registry.printkey", "windows.filescan", "windows.dumpfiles"
         ]
         sorted_options = sorted(options)
@@ -44,9 +45,9 @@ class MainApp:
         # Start the main event loop
         self.root.mainloop()
 
+
 if __name__ == "__main__":
     # Create and run the main application
     root = tk.Tk()
     app = MainApp(root)
     app.run()
-
