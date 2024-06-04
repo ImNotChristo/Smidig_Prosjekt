@@ -33,12 +33,13 @@ class StyledDropdown:
         # Update the manual command based on the selected option
         selected_command = self.get_selected_option()
         file_path = self.get_file_path()
-        vol_path = 'volatility3/vol.py'
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        vol_path = os.path.join(script_dir, '..', '..', 'volatility3', 'vol.py')
 
         if selected_command in ['windows.dumpfiles', 'windows.memmap', 'windows.handles', 'windows.dlllist']:
-            manual_command = f'python {vol_path} -f "{file_path}" -o "/path/to/dir" {selected_command} --pid <PID>'
+            manual_command = f'python "{vol_path}" -f "{file_path}" -o "/path/to/dir" {selected_command} --pid <PID>'
         elif selected_command == 'windows.vadyarascan':
-            manual_command = f'python {vol_path} -f "{file_path}" {selected_command} --yara-rules <string>'
+            manual_command = f'python "{vol_path}" -f "{file_path}" {selected_command} --yara-rules <string>'
         else:
-            manual_command = f'python {vol_path} -f "{file_path}" {selected_command}'
+            manual_command = f'python "{vol_path}" -f "{file_path}" {selected_command}'
         self.manual_command_var.set(manual_command)

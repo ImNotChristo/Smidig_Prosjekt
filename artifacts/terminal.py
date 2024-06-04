@@ -35,7 +35,10 @@ class MainApp:
         self.create_manual_entry()
 
         # Create Run button below the scan dropdown and pass the get_manual_command method
-        self.run_button = RunButton(self.right_frame, self.get_manual_command)
+        self.run_button = RunButton(self.right_frame, self.get_manual_command, self.update_output)
+
+        # Create output display
+        self.create_output_display()
 
     def create_frames(self):
         # Create frames for organizing layout
@@ -55,9 +58,22 @@ class MainApp:
         self.manual_entry = tk.Entry(self.middle_frame, textvariable=self.manual_command_var, width=80)
         self.manual_entry.grid(row=1, column=1, pady=10, sticky="w")
 
+    def create_output_display(self):
+        # Create output display text widget
+        self.output_label = tk.Label(self.root, text="Output:", font=("Helvetica", 12))
+        self.output_label.grid(row=2, column=0, padx=5, pady=5, sticky="w")
+
+        self.output_text = tk.Text(self.root, wrap=tk.WORD, width=100, height=20)
+        self.output_text.grid(row=3, column=0, columnspan=3, padx=10, pady=10)
+
     def get_manual_command(self):
         # Return the manual command
         return self.manual_command_var.get()
+
+    def update_output(self, text):
+        # Update the output display with new text
+        self.output_text.delete(1.0, tk.END)
+        self.output_text.insert(tk.END, text)
 
     def run(self):
         # Start the main event loop
