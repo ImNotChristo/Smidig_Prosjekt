@@ -2,6 +2,7 @@ import tkinter as tk
 from View.StyledDropdownView import StyledDropdown
 from View.StyledImageButtonView import StyledImageButton
 from View.RunButtonView import RunButton 
+from View.ManualCommandView import ManualCommandFieldStyle
 
 class MainApp:
     def __init__(self, root):
@@ -28,6 +29,9 @@ class MainApp:
 
         # Create Run button below the scan dropdown
         self.run_button = RunButton(self.right_frame)
+
+        # Crate manual command field 
+        self.manual_command_field_style = ManualCommandFieldStyle(self.left_frame)
 
     def create_frames(self):
         # Create frames for organizing layout
