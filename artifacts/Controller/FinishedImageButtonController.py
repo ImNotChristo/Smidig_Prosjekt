@@ -14,12 +14,7 @@ class FinishedImageButton:
         file_path = filedialog.askopenfilename(
             title="Select an Image File",
             filetypes=[
-                ("PNG files", "*.png"),
-                ("JPEG files", "*.jpg"),
-                ("JPEG files", "*.jpeg"),
-                ("GIF files", "*.gif"),
-                ("BMP files", "*.bmp"),
-                ("All files", "*.*"),
+                ("Mem files", "*.mem"),
                 ("Raw files", "*.raw")
             ]
         )
