@@ -15,3 +15,14 @@ class RunButton:
         # Define Run button command
         print("Run button clicked")
         # Add your functionality here
+
+        # function to change properties of button on hover
+    def changeOnHover(self, button, colorOnHover, colorOnLeave):
+        # Adjusting background of the widget
+        # Background on entering widget
+        button.bind("<Enter>", func=lambda e: button.config(
+            background=colorOnHover))
+ 
+        # Background color on leaving widget
+        button.bind("<Leave>", func=lambda e: button.config(
+            background=colorOnLeave))

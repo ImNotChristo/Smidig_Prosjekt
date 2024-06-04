@@ -12,15 +12,12 @@ class StyledDropdown:
         # Create dropdown and associated widgets
         self.selected_option = tk.StringVar(value="")
 
-        self.label = ttk.Label(self.master, text="Scan:", font=("Helvetica", 12))
+        self.label = ttk.Label(self.master, text="Command:", font=("Helvetica", 12))
         self.label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
         self.combobox = SearchableCombobox(self.master, textvariable=self.selected_option)
         self.combobox.set_completion_list(self.options)
         self.combobox.grid(row=0, column=1, pady=10, sticky="w")
-
-        # self.show_selected_button = ttk.Button(self.master, text="Show Selected", command=self.show_selected)
-        # self.show_selected_button.grid(row=1, column=0, columnspan=2, pady=(10, 0), sticky="w")
 
     def show_selected(self):
         # Show the selected item in the dropdown menu
