@@ -1,7 +1,8 @@
+# artifacts/View/StyledImageButtonView.py
+
 import tkinter as tk
-import PIL as pil
-from Controller.FinishedImageButtonController import FinishedImageButton
 from PIL import Image, ImageTk
+from Controller.FinishedImageButtonController import FinishedImageButton
 
 class StyledImageButton:
     def __init__(self, master):
@@ -15,9 +16,6 @@ class StyledImageButton:
 
         self.file_entry = tk.Entry(self.master, width=50)
         self.file_entry.grid(row=0, column=1)
-
-        # self.button = tk.Button(self.master, text="Browse", command=self.select_image_file)
-        # self.button.grid(row=0, column=2, padx=10, pady=10)
 
         # Load the icon image, resize it, and convert it to a PhotoImage object
         self.icon_image = Image.open("images/folderIcon.png")
@@ -34,3 +32,7 @@ class StyledImageButton:
     def select_image_file(self):
         # Open file dialog to select an image file
         self.finished_image_button.select_image_file()
+
+    def get_file_path(self):
+        # Return the selected file path
+        return self.file_entry.get()

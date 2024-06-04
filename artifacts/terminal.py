@@ -1,7 +1,9 @@
+# artifacts/terminal.py
+
 import tkinter as tk
 from View.StyledDropdownView import StyledDropdown
 from View.StyledImageButtonView import StyledImageButton
-from View.RunButtonView import RunButton 
+from View.RunButtonView import RunButton
 
 class MainApp:
     def __init__(self, root):
@@ -26,8 +28,8 @@ class MainApp:
         sorted_options = sorted(options)
         self.dropdown = StyledDropdown(self.middle_frame, sorted_options)
 
-        # Create Run button below the scan dropdown
-        self.run_button = RunButton(self.right_frame)
+        # Create Run button below the scan dropdown and pass the get_selected_option method
+        self.run_button = RunButton(self.right_frame, self.dropdown.get_selected_option, self.styled_image_button.get_file_path)
 
     def create_frames(self):
         # Create frames for organizing layout
