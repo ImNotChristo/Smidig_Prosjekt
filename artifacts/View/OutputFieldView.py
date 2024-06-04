@@ -13,8 +13,11 @@ class OutputField:
         self.text_output_field = tk.Text(self.master, height=20, width=90)
         self.text_output_field.pack()
         self.text_output_field.insert(tk.END, "Output skal printes her!")
+        self.text_output_field.config(state=tk.DISABLED)
 
     def display_output_text(self, message):
+        self.text_output_field.config(state=tk.NORMAL)
         self.text_output_field.insert(tk.END, message)
+        self.text_output_field.config(state=tk.DISABLED)
     
 
