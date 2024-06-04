@@ -31,7 +31,7 @@ class MainApp:
         self.run_button = RunButton(self.right_frame)
 
         # Crate manual command field 
-        self.manual_command_field_style = ManualCommandFieldStyle(self.left_frame)
+        self.manual_command_field_style = ManualCommandFieldStyle(self.command_frame)
 
     def create_frames(self):
         # Create frames for organizing layout
@@ -43,6 +43,9 @@ class MainApp:
 
         self.right_frame = tk.Frame(self.root, width=300, height=150)
         self.right_frame.grid(row=1, column=2, padx=10, pady=10, sticky="n")
+
+        self.command_frame = tk.Frame(self.root, width=300, height=150)
+        self.command_frame.grid(row=1, column=0, padx=10, pady=10, sticky="n")
 
     def run(self):
         # Start the main event loop
