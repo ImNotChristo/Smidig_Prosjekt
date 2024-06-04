@@ -10,6 +10,7 @@ class RunButton:
         # Create Run button
         self.btn = RunButtonFunction(self.master, self.run_command).btn
         self.btn.grid(row=0, column=0, pady=10, sticky="w")
+        self.changeOnHover(self.btn, "gray", "orange")
 
     def run_command(self):
         # Define Run button command
