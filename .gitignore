@@ -12,3 +12,4 @@ __pycache__/
 # Ignore virtual environments
 venv/
 env/
+/artifacts/DumpFiles/
