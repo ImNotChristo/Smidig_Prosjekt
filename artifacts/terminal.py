@@ -10,7 +10,7 @@ class MainApp:
         # Initialize the main application window
         self.root = root
         self.root.title("Artifacts vol.py (GUI)")
-        self.root.geometry("800x600")
+        self.root.geometry("1440x600")
         # self.root.configure(bg='white')
 
         # Create main frames
