@@ -11,7 +11,10 @@ def scan_file():
     filePath = data.get('FilePath')
     command = data.get('Command')
 
-    volatility_path = "C:/Users/evenj/OneDrive/Documents/GitHub/Smidig_Prosjekt/volatility3/vol.py"  # Adjust to your actual path
+    # Get the directory of the current script
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construct the path to vol.py relative to the current script
+    volatility_path = os.path.join(current_dir, '..', '..', 'volatility3', 'vol.py')
 
     if not os.path.exists(filePath):
         return jsonify({"error": "File path does not exist"}), 400
@@ -31,7 +34,7 @@ def scan_file():
 
 @appMain.route('/api/dummydata', methods=['GET'])
 def get_dummy_data():
-    with open('dummyData.json', 'r') as file:
+    with open(os.path.join(os.path.dirname(__file__), 'dummyData.json'), 'r') as file:
         data = json.load(file)
     return jsonify(data)
 
