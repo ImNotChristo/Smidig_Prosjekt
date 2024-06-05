@@ -1,5 +1,3 @@
-# artifacts/View/StyledDropdownView.py
-
 import tkinter as tk
 from tkinter import ttk
 from Controller.DropDownMenuController import SearchableCombobox
