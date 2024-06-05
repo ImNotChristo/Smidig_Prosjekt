@@ -11,7 +11,6 @@ class MainApp:
         self.root = root
         self.root.title("Artifacts vol.py (GUI)")
         self.root.geometry("1440x600")
-        # self.root.configure(bg='white')
 
         # Create main frames
         self.create_frames()
@@ -84,3 +83,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = MainApp(root)
     app.run()
+
