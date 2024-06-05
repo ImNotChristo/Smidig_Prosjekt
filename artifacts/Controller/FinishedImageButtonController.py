@@ -15,7 +15,5 @@ class FinishedImageButton:
         )
 
         if file_path:
-            # messagebox.showinfo("Selected Image File", f"Selected file: {file_path}")  # Comment out or remove this line
             self.file_entry.delete(0, tk.END)
             self.file_entry.insert(0, file_path)
-

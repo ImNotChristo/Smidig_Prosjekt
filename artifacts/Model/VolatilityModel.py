@@ -1,4 +1,3 @@
-# Model/VolatilityModel.py
 import subprocess
 import os
 
@@ -22,7 +21,6 @@ class VolatilityModel:
         
         vol_command = ['python', vol_path, '-f', self.file_path]
 
-        # Handle special cases for specific commands
         if self.command in ['windows.dumpfiles', 'windows.memmap', 'windows.handles', 'windows.dlllist']:
             pid = self.ask_for_pid()
             if not pid:
@@ -54,14 +52,10 @@ class VolatilityModel:
             return f"Error running Volatility command: {e}"
 
     def ask_for_pid(self):
-        # Implement as needed
         return "1234"
 
     def ask_for_output_dir(self):
-        # Implement as needed
         return "/path/to/dir"
 
     def ask_for_yara_rules(self):
-        # Implement as needed
         return "rules"
-

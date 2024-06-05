@@ -1,5 +1,3 @@
-# artifacts/View/StyledDropdownView.py
-
 import tkinter as tk
 from tkinter import ttk
 from Controller.DropDownMenuController import SearchableCombobox
@@ -14,7 +12,6 @@ class StyledDropdown:
         self.create_widgets(label_text)
 
     def create_widgets(self, label_text):
-        # Create dropdown and associated widgets
         self.selected_option = tk.StringVar(value="")
 
         self.label = ttk.Label(self.master, text=label_text, font=("Helvetica", 12))
@@ -26,11 +23,9 @@ class StyledDropdown:
         self.combobox.bind('<<ComboboxSelected>>', self.update_manual_command)
 
     def get_selected_option(self):
-        # Return the selected option
         return self.selected_option.get()
 
     def update_manual_command(self, event):
-        # Update the manual command based on the selected option
         selected_command = self.get_selected_option()
         file_path = self.get_file_path()
         script_dir = os.path.dirname(os.path.abspath(__file__))

@@ -1,5 +1,3 @@
-# artifacts/View/RunButtonView.py
-
 import tkinter as tk
 from Controller.RunButtonController import RunButtonFunction
 import subprocess
@@ -12,15 +10,11 @@ class RunButton:
         self.create_button()
 
     def create_button(self):
-        # Create Run button
         self.btn = RunButtonFunction(self.master, self.run_command).btn
         self.btn.grid(row=0, column=0, pady=10, sticky="w")
 
     def run_command(self):
-        # Fetch the manual command
         manual_command = self.get_manual_command()
-        print(f"Run button clicked. Manual command: {manual_command}")
-        # Add functionality to execute the manual command using Volatility
         self.execute_volatility_command(manual_command)
 
     def execute_volatility_command(self, command):
