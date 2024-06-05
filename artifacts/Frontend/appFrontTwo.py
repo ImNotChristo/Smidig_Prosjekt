@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, filedialog
 import requests
 
 class Application(tk.Tk):
@@ -18,19 +18,20 @@ class Application(tk.Tk):
         tk.Label(top_frame, text="File:").grid(row=0, column=0, padx=5, pady=5)
         self.file_entry = tk.Entry(top_frame, width=30)
         self.file_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.file_entry.insert(0, "C:/Users/evenj/OneDrive/Skrivebord/memdump-001.mem")
+        self.file_button = tk.Button(top_frame, text="Browse", command=self.browse_file)
+        self.file_button.grid(row=0, column=2, padx=5, pady=5)
         
         # Platform Selection
-        tk.Label(top_frame, text="Platform:").grid(row=0, column=2, padx=5, pady=5)
-        self.platform_combobox = ttk.Combobox(top_frame, values=["Windows", "Linux"])
-        self.platform_combobox.grid(row=0, column=3, padx=5, pady=5)
-        self.platform_combobox.set("Windows")
+        tk.Label(top_frame, text="Platform:").grid(row=0, column=3, padx=5, pady=5)
+        self.platform_combobox = ttk.Combobox(top_frame, values=["Windows", "Linux", "Mac"])
+        self.platform_combobox.grid(row=0, column=4, padx=5, pady=5)
+        self.platform_combobox.bind("<<ComboboxSelected>>", self.update_command_options)
         
         # Command Selection
-        tk.Label(top_frame, text="Command:").grid(row=0, column=4, padx=5, pady=5)
-        self.command_combobox = ttk.Combobox(top_frame, values=["windows.pslist", "windows.info", "windows.psscan"])
-        self.command_combobox.grid(row=0, column=5, padx=5, pady=5)
-        self.command_combobox.set("windows.pslist")
+        tk.Label(top_frame, text="Command:").grid(row=0, column=5, padx=5, pady=5)
+        self.command_combobox = ttk.Combobox(top_frame)
+        self.command_combobox.grid(row=0, column=6, padx=5, pady=5)
+        self.command_combobox.bind("<<ComboboxSelected>>", self.update_manual_entry)
         
         # Manual Command Entry
         tk.Label(top_frame, text="Manual:").grid(row=1, column=0, padx=5, pady=5)
@@ -39,7 +40,7 @@ class Application(tk.Tk):
         
         # Scan Button
         self.scan_button = tk.Button(top_frame, text="Scan", command=self.scan_file)
-        self.scan_button.grid(row=0, column=6, rowspan=2, padx=5, pady=5, ipadx=10, ipady=5)
+        self.scan_button.grid(row=0, column=7, rowspan=2, padx=5, pady=5, ipadx=10, ipady=5)
         
         # Command Parameter Selection Frame
         param_frame = tk.Frame(self)
@@ -85,10 +86,20 @@ class Application(tk.Tk):
         self.status.set("Status: Ready")
         tk.Label(self, textvariable=self.status, bd=1, relief=tk.SUNKEN, anchor=tk.W).pack(side=tk.BOTTOM, fill=tk.X)
         
+    def browse_file(self):
+        file_path = filedialog.askopenfilename(title="Select an Image File", filetypes=[("Mem files", "*.mem"), ("Raw files", "*.raw")])
+        if file_path:
+            self.file_entry.delete(0, tk.END)
+            self.file_entry.insert(0, file_path)
+        
     def scan_file(self):
         file_path = self.file_entry.get()
         platform = self.platform_combobox.get().lower()
         command = self.command_combobox.get()
+        
+        if not file_path or not platform or not command:
+            self.status.set("Status: Please fill all the fields")
+            return
         
         json_data = {
             "FilePath": file_path,
@@ -110,6 +121,32 @@ class Application(tk.Tk):
         except requests.exceptions.RequestException as e:
             self.progress_bar.stop()
             self.status.set(f"Status: Error - {e}")
+            
+    def update_command_options(self, event):
+        platform = self.platform_combobox.get().lower()
+        commands = {
+            "windows": ["windows.pslist", "windows.info", "windows.psscan", "windows.pstree", "windows.dumpfiles", "windows.memmap", "windows.handles", "windows.dlllist", "windows.cmdline", "windows.netscan", "windows.netstat", "windows.registry.printkey", "windows.filescan"],
+            "linux": ["linux.pslist", "linux.info", "linux.psscan", "linux.pstree", "linux.dumpfiles", "linux.memmap", "linux.handles", "linux.dlllist", "linux.cmdline", "linux.netscan", "linux.netstat", "linux.registry.printkey", "linux.filescan"],
+            "mac": ["mac.pslist", "mac.info", "mac.psscan", "mac.pstree", "mac.dumpfiles", "mac.memmap", "mac.handles", "mac.dlllist", "mac.cmdline", "mac.netscan", "mac.netstat", "mac.registry.printkey", "mac.filescan"]
+        }
+        
+        self.command_combobox['values'] = commands.get(platform, [])
+        self.command_combobox.set('')
+        self.manual_entry.delete(0, tk.END)
+        
+    def update_manual_entry(self, event):
+        command = self.command_combobox.get()
+        file_path = self.file_entry.get() or "<file_path>"
+        platform = self.platform_combobox.get().lower() or "<platform>"
+        
+        syntax = f"python vol.py -f {file_path} {command}"
+        if command in ['windows.dumpfiles', 'windows.memmap', 'windows.handles', 'windows.dlllist', 'linux.dumpfiles', 'linux.memmap', 'linux.handles', 'linux.dlllist', 'mac.dumpfiles', 'mac.memmap', 'mac.handles', 'mac.dlllist']:
+            syntax += " --pid <PID>"
+        elif command in ['windows.vadyarascan', 'linux.vadyarascan', 'mac.vadyarascan']:
+            syntax += " --yara-rules <rules>"
+        
+        self.manual_entry.delete(0, tk.END)
+        self.manual_entry.insert(0, syntax)
             
     def update_table(self, output):
         for i in self.tree.get_children():
