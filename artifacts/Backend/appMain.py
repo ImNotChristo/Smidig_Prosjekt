@@ -11,7 +11,7 @@ def scan_file():
     filePath = data.get('FilePath')
     command = data.get('Command')
 
-    volatility_path = "C:/Users/evenj/tools/Volatility3/volatility3-develop/vol.py"  # Adjust to your actual path
+    volatility_path = "C:/Users/evenj/OneDrive/Documents/GitHub/Smidig_Prosjekt/volatility3/vol.py"  # Adjust to your actual path
 
     if not os.path.exists(filePath):
         return jsonify({"error": "File path does not exist"}), 400
