@@ -1,6 +1,7 @@
 # artifacts/terminal.py
 
 import tkinter as tk
+from tkinter import ttk
 from View.StyledDropdownView import StyledDropdown
 from View.StyledImageButtonView import StyledImageButton
 from View.RunButtonView import RunButton
@@ -11,7 +12,6 @@ class MainApp:
         self.root = root
         self.root.title("Artifacts vol.py (GUI)")
         self.root.geometry("1440x600")
-        # self.root.configure(bg='white')
 
         # Create main frames
         self.create_frames()
@@ -59,21 +59,65 @@ class MainApp:
         self.manual_entry.grid(row=1, column=1, pady=10, sticky="w")
 
     def create_output_display(self):
-        # Create output display text widget
+        # Create output display treeview widget
         self.output_label = tk.Label(self.root, text="Output:", font=("Helvetica", 12))
         self.output_label.grid(row=2, column=0, padx=5, pady=5, sticky="w")
 
-        self.output_text = tk.Text(self.root, wrap=tk.WORD, width=100, height=20)
-        self.output_text.grid(row=3, column=0, columnspan=3, padx=10, pady=10)
+        self.output_tree = ttk.Treeview(self.root, show="headings")
+        self.output_tree.grid(row=3, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
+        self.root.grid_rowconfigure(3, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
 
     def get_manual_command(self):
         # Return the manual command
         return self.manual_command_var.get()
 
     def update_output(self, text):
-        # Update the output display with new text
-        self.output_text.delete(1.0, tk.END)
-        self.output_text.insert(tk.END, text)
+        # Clear the previous output
+        for item in self.output_tree.get_children():
+            self.output_tree.delete(item)
+
+        # Clear existing columns
+        self.output_tree["columns"] = ()
+        
+        lines = text.strip().split("\n")
+
+        # Filter out lines containing progress or irrelevant information
+        relevant_lines = [line for line in lines if line.strip() and not any(keyword in line for keyword in ["Volatility", "Progress", "Reading Symbol layer", "PDB scanning finished"])]
+
+        # Debug: Print the relevant lines
+        print("Relevant lines:", relevant_lines)
+
+        if relevant_lines:
+            # Assume the first relevant line contains the headers
+            headers = relevant_lines[0].split("\t")  # Split by tab as headers are tab-separated
+            self.output_tree["columns"] = headers
+
+            for col in headers:
+                self.output_tree.heading(col, text=col, command=lambda c=col: self.sort_by(self.output_tree, c, 0))
+                self.output_tree.column(col, anchor="w")
+
+            # Insert the rows of data
+            for line in relevant_lines[1:]:
+                values = line.split("\t")  # Split by tab as values are tab-separated
+                # Debug: Print the values
+                print("Values:", values)
+                
+                if len(values) == len(headers):
+                    self.output_tree.insert("", "end", values=values)
+                else:
+                    # Debug: Print a warning if values don't match headers length
+                    print("Warning: Mismatch in header and values length. Values:", values)
+
+    def sort_by(self, tree, col, descending):
+        # Get the data to be sorted
+        data = [(tree.set(child, col), child) for child in tree.get_children('')]
+        # Sort the data
+        data.sort(reverse=descending)
+        for index, item in enumerate(data):
+            tree.move(item[1], '', index)
+        # Reverse sort next time
+        tree.heading(col, command=lambda c=col: self.sort_by(tree, c, int(not descending)))
 
     def run(self):
         # Start the main event loop
