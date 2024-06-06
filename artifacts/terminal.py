@@ -30,6 +30,7 @@ class MainApp:
         sorted_options = sorted(options)
         self.dropdown = StyledDropdown(self.middle_frame, sorted_options, self.manual_command_var, self.styled_image_button.get_file_path)
 
+<<<<<<< Updated upstream
         # Create manual entry
         self.create_manual_entry()
 
@@ -38,6 +39,10 @@ class MainApp:
 
         # Create output display
         self.create_output_display()
+=======
+        # Create Run button below the scan dropdown and pass the get_selected_option method
+        self.run_button = RunButton(self.right_frame, self.dropdown.get_selected_option, self.styled_image_button.get_file_path)
+>>>>>>> Stashed changes
 
     def create_frames(self):
         # Create frames for organizing layout

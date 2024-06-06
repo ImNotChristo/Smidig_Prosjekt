@@ -13,3 +13,4 @@ __pycache__/
 venv/
 env/
 /artifacts/DumpFiles/
+artifacts/Resources/memdump-001.mem
