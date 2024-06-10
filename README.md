@@ -1,10 +1,10 @@
 # Smidig_Prosjekt
-## Download
+## Download and install
 
 Because of dependencies, these are the modules and versions which will be needed to run the GUI.
 
 ## Downloading Python
-1. Download and use the newest version of python, which will be Python 3.12.3 64-bit
+1. Download and use the newest version of python, which will be Python 3.12.3 64-bit. Use this link or download through Microsoft store
 link: https://www.python.org/downloads/ 
 2. Ensure you can run pip from the command line: python -m pip --version (NOT the same command for mac/linux) | MAC/Linux: python3 -m ensurepip --default-pip.
 3. Ensure pip, setuptools, and wheel are up to date: python -m pip install --upgrade pip setuptools wheel | Unix/macOS: python3 -m pip install --upgrade pip setuptools wheel
@@ -29,6 +29,9 @@ source: https://packaging.python.org/en/latest/tutorials/installing-packages/#in
 6. In the 'Frontend' folder, start the appFrontMain.py using this command: python appFrontMain.py
 7. If everything is downloaded correctly and you are using a non virtual enviroment intepreter, the GUI should start up!
 
-For More information on how to use the GUI, read this documentation!
-Link: bffgdfgsdfdfdf
+## Quick guide on using the Artifacts (GUI)
+1. Select an image file.
+2. Choose a platform, ensure it matches the one used for the memory image file dump.
+3. Select a Scan.
+4. Click scan.
 
