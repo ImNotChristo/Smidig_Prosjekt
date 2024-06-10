@@ -6,9 +6,9 @@ Because of dependencies, these are the modules and versions which will be needed
 ### Downloading Python
 1. Download and use the newest version of python, which will be Python 3.12.3 64-bit
 link: https://www.python.org/downloads/ 
-2. Ensure you can run pip from the command line: py -m pip --version (NOT the same command for mac/linux) | MAC/Linux: python3 -m ensurepip --default-pip.
-3. Ensure pip, setuptools, and wheel are up to date: py -m pip install --upgrade pip setuptools wheel | Unix/macOS: python3 -m pip install --upgrade pip setuptools wheel
-4. Upgrade python packages if needed or using outdated versions, Windows: py -m pip install --upgrade "SomeProject" | Unix/macOS: python3 -m pip install --upgrade "SomeProject".
+2. Ensure you can run pip from the command line: python -m pip --version (NOT the same command for mac/linux) | MAC/Linux: python3 -m ensurepip --default-pip.
+3. Ensure pip, setuptools, and wheel are up to date: python -m pip install --upgrade pip setuptools wheel | Unix/macOS: python3 -m pip install --upgrade pip setuptools wheel
+4. Upgrade python packages if needed or using outdated versions, Windows: python -m pip install --upgrade "SomeProject" | Unix/macOS: python3 -m pip install --upgrade "SomeProject".
 
 NOTE!! This has only been tested on the IDE VScode / Visual Studio Code.
 source: https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-packages
