@@ -1,4 +1,4 @@
-# Smidig_Prosjekt
+# Artifacts, an Graphical User Interface for the Memory Forensics tool Volatility 3 
 ## Download and install
 
 Because of dependencies, these are the modules and versions which will be needed to run the GUI.
