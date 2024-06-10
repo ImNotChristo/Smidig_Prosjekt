@@ -1,9 +1,9 @@
 # Smidig_Prosjekt
-## Download Python and other dependencies
+## Download
 
 Because of dependencies, these are the modules and versions which will be needed to run the GUI.
 
-### Downloading Python
+## Downloading Python
 1. Download and use the newest version of python, which will be Python 3.12.3 64-bit
 link: https://www.python.org/downloads/ 
 2. Ensure you can run pip from the command line: python -m pip --version (NOT the same command for mac/linux) | MAC/Linux: python3 -m ensurepip --default-pip.
@@ -13,14 +13,14 @@ link: https://www.python.org/downloads/
 NOTE!! This has only been tested on the IDE VScode / Visual Studio Code.
 source: https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-packages
 
-### Downloading dependencies 
+## Downloading dependencies 
 1. Open the project in an IDE (preferable on VScode), navigate to the 'artifacts' folder and open the IDE terminal. 
 2. In the terminal, write these commands: 
         - pip install requests 
         - pip install flask 
 
 
-# How to start the GUI Artifacts
+## How to start the GUI Artifacts
 1. Select a python intepreter, your IDE will suggest some python intepreters depending on your python version. Make sure you always select an intepreter with the newest version of python and it says global or recommended. We suggest not to use a virtual enviroment intepreter (venv), since it may cause some issues regarding dependencies. 
 2. When an intepreter is selected, navigate to the 'Backend' folder from the 'artifacts' folder using the IDE terminal.
 3. In the 'Backend' folder, start the appMain.py file using this command: python appMain.py 
