@@ -63,3 +63,4 @@ def register_routes(app):
         Home route for the Flask application.
         """
         return "Welcome to the flask app!"
+

@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from routes import register_routes
 
@@ -17,3 +18,4 @@ register_routes(appMain)
 # Run the Flask application if this script is executed directly
 if __name__ == "__main__":
     appMain.run(port=6000)
+
